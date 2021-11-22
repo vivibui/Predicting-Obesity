@@ -1,0 +1,105 @@
+---
+title: "Untitled"
+author: "Vivian Bui"
+date: "11/15/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{R}
+library(ggplot2)
+library(dplyr)
+#Load
+
+df <- ObesityDataSet_raw_and_data_sinthetic
+
+#Clean 
+df <- df %>% na.omit() 
+
+#BMI
+df <- df %>% mutate(BMI=Weight/(Height^2))
+
+#BMI vs. Gender
+#Grade: 2
+df %>% ggplot(aes(x = Gender, y = BMI, color = Gender )) + geom_boxplot() + 
+ggtitle("BMI vs. Gender") + ylab("BMI") + xlab("Gender")+ theme(legend.position="none")
+
+
+
+#-------------Age---------- #Grade: 1
+#Rounding Age
+age <- df %>% select(Age)
+age <- round(age,0) 
+#Subset BMI
+BMI <- df %>% select(BMI)
+#Add Freq_subset
+age <- age %>% mutate(BMI)
+#BMI vs. Age
+age %>% ggplot(aes(x = Age, y = BMI, color = Age)) + geom_point() + 
+ggtitle("BMI vs. Age") + ylab("BMI") + xlab("Age")+ theme(legend.position="none")
+
+
+
+#BMI vs. Family History
+#Grade: 3
+df %>% ggplot(aes(x = family_history_with_overweight, y = BMI, color = family_history_with_overweight )) + geom_boxplot() + 
+ggtitle("BMI vs. Family History") + ylab("BMI") + xlab("Family History")+ theme(legend.position="none")
+
+#BMI vs. Transportation 
+#Grade: 2
+df %>% ggplot(aes(x = MTRANS, y = BMI, color = MTRANS )) + geom_boxplot() + 
+ggtitle("BMI vs. Transportation") + ylab("BMI") + xlab("Transportation")+ theme(legend.position="none")
+
+#######Frequencies 
+
+#BMI vs. Frequency consumption of high-calories food 
+#Grade: 3
+df %>% ggplot(aes(x = FAVC, y = BMI, color = FAVC )) + geom_boxplot() + 
+ggtitle("BMI vs. Frequency consumption of high-calories food ") + ylab("BMI") + xlab("Frequency consumption of high-calories food ")+ theme(legend.position="none")
+
+#Rounding Frequencies
+freq_subset <- df %>% select(FAF, FCVC, TUE, CH2O, NCP)
+freq_subset <- round(freq_subset,0) 
+freq_subset
+
+#Subset BMI
+BMI <- df %>% select(BMI)
+#Add Freq_subset
+freq_subset <- freq_subset %>% mutate(BMI)
+
+#BMI vs. Frequency consumption of vegetable
+#Grade: 1
+freq_subset %>% ggplot(aes(x = FCVC, y = BMI, color = FCVC)) + geom_point() + 
+ggtitle("BMI vs. Frequency consumption of vegetable") + ylab("BMI") + xlab("Frequency consumption of vegetable")+ theme(legend.position="none")
+
+#BMI vs. Frequency of physical activities 
+#Grade: 3
+freq_subset %>% ggplot(aes(x = FAF, y = BMI, color = FAF )) + geom_point() + 
+ggtitle("BMI vs. Frequency of physical activities") + ylab("BMI") + xlab("Frequency of physical activities")+ theme(legend.position="none")
+
+#BMI vs. Alcohol Consumption
+#Grade: 1
+df %>% ggplot(aes(x = CALC, y = BMI, color = CALC )) + geom_boxplot() + 
+ggtitle("BMI vs. Alcohol Consumption") + ylab("BMI") + xlab("CALC")+ theme(legend.position="none")
+
+#BMI vs. Technology Usage Frequency
+#Grade: 1
+freq_subset %>% ggplot(aes(x = TUE, y = BMI, color = TUE)) + geom_point() + 
+ggtitle("BMI vs. Technology Usage Frequency") + ylab("BMI") + xlab("Technology Usage Frequency")+ theme(legend.position="none")
+
+#BMI vs. Number of main meals
+#Grade: 1
+freq_subset %>% ggplot(aes(x = NCP, y = BMI, color = NCP)) + geom_point() + 
+ggtitle("BMI vs. Number of main meals") + ylab("BMI") + xlab("Number of main meals")+ theme(legend.position="none")
+
+#BMI vs. Consumption of Water Daily
+#Grade: 1
+freq_subset %>% ggplot(aes(x = CH2O, y = BMI, color = CH2O)) + geom_point() + 
+ggtitle("BMI vs. Consumption of Water Daily") + ylab("BMI") + xlab("Consumption of Water Daily")+ theme(legend.position="none")
+
+
+
+```
