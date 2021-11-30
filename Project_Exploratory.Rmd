@@ -101,5 +101,31 @@ freq_subset %>% ggplot(aes(x = CH2O, y = BMI, color = CH2O)) + geom_point() +
 ggtitle("BMI vs. Consumption of Water Daily") + ylab("BMI") + xlab("Consumption of Water Daily")+ theme(legend.position="none")
 
 
+```
+
+
+
+```{R}
+Insufficient <- df %>% filter(NObeyesdad=="Insufficient_Weight")
+Normal <- df %>% filter(NObeyesdad=="Normal_Weight")
+ObeseTypeI <- df %>% filter(NObeyesdad=="Obesity_Type_I")
+ObeseTypeII <- df %>% filter(NObeyesdad=="Obesity_Type_II")
+ObeseTypeIII <- df %>% filter(NObeyesdad=="Obesity_Type_III")
+Overweight.LevelI <- df %>% filter(NObeyesdad=="Overweight_Level_I")
+Overweight.LevelII <- df %>% filter(NObeyesdad=="Overweight_Level_II")
+```
+
+```{R}
+#lm(BMI~factor(family_history_with_overweight) + factor(FAF) + factor(FCVC), data = Insufficient)
+
+cor(Insufficient$BMI,Insufficient$FAF)
 
 ```
+
+```{R}
+
+#df %>% ggplot(aes(x = Gender, color = TUE)) + geom_histogram(, stat="") +
+#ggtitle("BMI vs. Technology Usage Frequency") + ylab("BMI") + xlab("Technology Usage Frequency")+ theme(legend.position="none")
+
+```
+
